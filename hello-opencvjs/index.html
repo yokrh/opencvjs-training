@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hello OpenCV.js</title>
+</head>
+<body>
+  <h2>Hello OpenCV.js</h2>
+  <p id="status">OpenCV.js is loading...</p>
+  <div>
+    <img id="imageSrc" alt="No Image">
+    <div class="caption">imageSrc <input type="file" id="fileInput" name="file"></div>
+    <canvas id="canvasOutput"></canvas>
+    <div class="caption">canvasOutput</div>
+  </div>
+
+  <script>
+    console.log('isOpenCVready', isOpenCVready());
+
+    const imgElement = document.getElementById('imageSrc');
+    const inputElement = document.getElementById('fileInput');
+
+    inputElement.addEventListener('change', (e) => {
+      imgElement.src = URL.createObjectURL(e.target.files[0]);
+    }, false);
+
+    imgElement.onload = () => {
+      console.log('isOpenCVready', isOpenCVready());
+
+      const mat = cv.imread(imgElement);
+      cv.cvtColor(mat, mat, cv.COLOR_RGBA2GRAY, 0);
+      cv.imshow('canvasOutput', mat);
+
+      mat.delete();  // neccesary. important.
+    }
+    function onOpenCvReady() {
+      console.log('OpenCV.js is ready.');
+    }
+    function isOpenCVready() {
+      if (typeof(cv) != 'undefined') return true;
+      return false;
+    }
+  </script>
+
+  <script async src="./opencv.js" onload="onOpenCvReady();"></script>
+</body>
+</html>
