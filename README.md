@@ -25,7 +25,8 @@ https://docs.opencv.org/3.4.1/d4/da1/tutorial_js_setup.html
 ```
 
 ```sh
-curl -LO https://docs.opencv.org/3.4.1/opencv.js
+# curl -LO https://docs.opencv.org/3.4.1/opencv.js
+curl -LO https://docs.opencv.org/4.0.1/opencv.js
 ```
 
 
